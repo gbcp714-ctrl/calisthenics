@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2f5f91">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Calisthenics">
+<title>Scheda Calisthenics</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="head">
+    <h1>Scheda Calisthenics</h1>
+    <div class="subtitle">3 giorni · scheda mobile · progressi salvati sul dispositivo</div>
+    <div id="tabs" class="tabs"></div>
+  </div>
+</header>
+<main>
+  <h2 id="dayTitle" style="margin:2px 2px 8px;font-size:20px"></h2>
+  <div class="progress-wrap">
+    <div class="progress"><div id="bar"></div></div><div id="pct" class="progress-label">0%</div>
+  </div>
+  <div id="list"></div>
+</main>
+
+<div class="bottom">
+  <div class="bottom-inner">
+    <button id="resetDay" class="reset-btn">Azzera giorno</button>
+    <button id="resetAll" class="reset-btn">Azzera tutto</button>
+  </div>
+</div>
+
+<div id="timerOverlay">
+  <div class="timerbox">
+    <div id="timerName" class="timername"></div>
+    <div id="timerBig" class="timerbig">0s</div>
+    <div class="timercontrols">
+      <button id="add30">+30 sec</button>
+      <button id="closeTimer">Chiudi</button>
+    </div>
+  </div>
+</div>
+
+<script src="workouts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
