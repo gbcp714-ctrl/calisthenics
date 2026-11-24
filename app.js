@@ -6,7 +6,7 @@ const $=id=>document.getElementById(id);
 const key=(d,id,kind)=>`${VERSION}_${d}_${id}_${kind}`;
 const fmt=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
 function prepareUi(){
- document.querySelector('.subtitle').textContent='Patrick · 28 settembre – 25 ottobre 2026 · dati sul dispositivo';
+ document.querySelector('.subtitle').textContent='Patrick Scheda 3 + Steve Reeves · lun / mer / ven · dati sul dispositivo';
  [...$('week').options].forEach(o=>{if(Number(o.value)>4)o.remove()});
  // V4: tutti i controlli del timer sono nell'HTML; fallback per eventuale HTML precedente ancora in cache.
  if(!$('timerMain')) $('timerOverlay').innerHTML='<div class="timerbox"><div id="timerType" class="timer-type"></div><div id="timerName" class="timername"></div><div id="timerTarget" class="timertarget"></div><div id="timerBig" class="timerbig" role="timer">0:00</div><div id="timerStatus" class="timerstatus"></div><div class="timercontrols"><button id="timerMain" class="timer-primary"></button><button id="add30" class="timer-secondary" hidden>+30 sec</button><button id="closeTimer" class="timer-secondary">Chiudi</button></div></div>';
@@ -27,10 +27,21 @@ function migrateMatchingNotes(){
  }
  localStorage.setItem('cal3_notes_migrated','1');
 }
+function tabGroup(id){return id.startsWith('sr')?'steve':(id==='g4'||id==='g5'?'other':'patrick')}
 function render(){
  $('tabs').replaceChildren();
- for(const day of WORKOUTS){const btn=document.createElement('button');btn.className='tab'+(day.id===state.day?' active':'');btn.textContent=day.title;btn.onclick=()=>{state.day=day.id;localStorage.setItem('cal_day',day.id);render()};$('tabs').append(btn)}
- $('week').value=String(state.week);const day=WORKOUTS.find(d=>d.id===state.day);$('dayTitle').textContent=day.title;
+ let prevGroup=null;
+ for(const day of WORKOUTS){
+  const group=tabGroup(day.id);
+  if(prevGroup&&group!==prevGroup){const sep=document.createElement('span');sep.className='tab-sep';sep.setAttribute('aria-hidden','true');$('tabs').append(sep)}
+  prevGroup=group;
+  const btn=document.createElement('button');btn.type='button';btn.className='tab tab-'+group+(day.id===state.day?' active':'');btn.textContent=day.tabLabel||day.title;btn.onclick=()=>{state.day=day.id;localStorage.setItem('cal_day',day.id);render()};$('tabs').append(btn)
+ }
+ $('week').value=String(state.week);const day=WORKOUTS.find(d=>d.id===state.day)||WORKOUTS[0];
+ if(state.day!==day.id){state.day=day.id;localStorage.setItem('cal_day',day.id)}
+ $('dayTitle').textContent=day.title;
+ const needsWeek=['g1','g2','g3'].includes(day.id)||day.exercises.some(e=>e.progress);
+ document.querySelector('.weekbox').hidden=!needsWeek;
  const list=$('list');list.replaceChildren();let completed=0;
  for(const e of day.exercises){
   const checked=localStorage.getItem(key(day.id,e.id,'done'))==='1';if(checked)completed++;

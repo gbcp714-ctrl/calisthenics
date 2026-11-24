@@ -5,7 +5,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ari
 header{position:sticky;top:0;z-index:20;background:rgba(243,246,250,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .head{max-width:760px;margin:auto;padding:10px 12px 9px}
 h1{margin:0;font-size:20px}.subtitle{font-size:12px;color:var(--muted);margin-top:2px}
-.tabs{display:flex;gap:6px;overflow:auto;padding-top:8px}.tab{border:0;background:#e1ebf5;color:#294e73;padding:8px 13px;border-radius:999px;font-weight:750;white-space:nowrap}.tab.active{background:var(--blue);color:#fff}
+.tabs{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 2px 6px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{border:0;background:#e1ebf5;color:#294e73;padding:8px 11px;border-radius:999px;font-weight:750;font-size:13px;line-height:1.2;min-height:40px;white-space:nowrap;flex:0 0 auto}.tab.active{background:var(--blue);color:#fff}.tab-steve{background:#dcefe6;color:#1e5a42}.tab-steve.active{background:#2a7a58;color:#fff}.tab-other{background:#eee8df;color:#5a4a32}.tab-other.active{background:#6b5a3e;color:#fff}.tab-sep{flex:0 0 1px;width:1px;align-self:stretch;margin:4px 3px;background:var(--line);border-radius:1px}
 .weekbox{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:13px}.weekbox label{font-weight:700}.weekbox select{border:1px solid var(--line);border-radius:10px;background:white;padding:6px 8px;font:inherit}
 main{max-width:760px;margin:auto;padding:10px 10px 92px}
 .dayrow{display:flex;align-items:center;justify-content:space-between;margin:0 2px 7px}.dayrow h2{margin:0;font-size:18px}
